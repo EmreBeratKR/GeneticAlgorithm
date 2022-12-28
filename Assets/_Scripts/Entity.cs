@@ -2,19 +2,29 @@ using UnityEngine;
 
 namespace EmreBeratKR.GeneticAlgorithm
 {
-    public abstract class Entity : MonoBehaviour, IEntity<Entity>
+    public abstract class Entity : MonoBehaviour, IEntity
     {
-        public virtual Entity Clone()
+        public virtual void Initialize()
         {
-            return this;
+            
+        }
+        
+        public virtual object Clone()
+        {
+            return Instantiate(this);
         }
 
-        public virtual void Tick(float deltaTime)
+        public virtual void Mutate()
         {
             
         }
 
-        public virtual void Mutate()
+        public virtual void Randomize()
+        {
+            
+        }
+        
+        public virtual void Tick(float deltaTime)
         {
             
         }

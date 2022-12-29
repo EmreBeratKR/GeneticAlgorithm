@@ -5,13 +5,14 @@ namespace EmreBeratKR.GeneticAlgorithm
     public sealed class CubeEntityBrain : Brain
     {
         private const float MutationPercent = 1;
-        private const int DefaultSize = 10000;
+        private const int DefaultSize = 5000;
 
 
         public static CubeEntityBrain Default => new(DefaultSize);
         
 
         public Vector3 CurrentDirection => m_Directions[m_CurrentDirectionIndex];
+        public int DirectionLeft => m_Directions.Length - m_CurrentDirectionIndex;
         public bool HasDirectionLeft => m_CurrentDirectionIndex < m_Directions.Length;
 
 

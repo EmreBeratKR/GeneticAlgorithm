@@ -4,7 +4,12 @@ namespace EmreBeratKR.GeneticAlgorithm
 {
     public abstract class Entity : MonoBehaviour, IEntity
     {
-        public virtual void Initialize()
+        public abstract float Fitness { get; }
+        public abstract bool IsAlive { get; protected set; }
+        public abstract bool IsSucceed { get; protected set; }
+
+
+        public virtual void Initialize(Vector3 position)
         {
             
         }
@@ -27,6 +32,16 @@ namespace EmreBeratKR.GeneticAlgorithm
         public virtual void Tick(float deltaTime)
         {
             
+        }
+
+        public virtual void Kill()
+        {
+            IsAlive = false;
+        }
+
+        public virtual void Succeed()
+        {
+            IsSucceed = true;
         }
     }
 }

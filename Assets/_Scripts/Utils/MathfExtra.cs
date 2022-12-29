@@ -1,13 +1,13 @@
 using System;
 
-namespace EmreBeratKR.GeneticAlgorithm
+namespace Utils
 {
     public static class MathfExtra
     {
-        public static float Sigmoid(float x)
+        public static float Sigmoid(float x, double @base = Math.E)
         {
             var numerator = 1d;
-            var denominator = 1d + Math.Pow(Math.E, x);
+            var denominator = 1d + Math.Pow(@base, -x);
             return (float) (numerator / denominator);
         }
     }

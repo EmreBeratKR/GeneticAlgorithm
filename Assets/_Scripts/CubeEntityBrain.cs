@@ -4,15 +4,16 @@ namespace EmreBeratKR.GeneticAlgorithm
 {
     public sealed class CubeEntityBrain : Brain
     {
-        private const float MutationPercent = 1;
-        private const int DefaultSize = 5000;
+        private const float MutationRate = 0f;
+        private const int DefaultSize = 1000;
 
 
         public static CubeEntityBrain Default => new(DefaultSize);
         
 
         public Vector3 CurrentDirection => m_Directions[m_CurrentDirectionIndex];
-        public int DirectionLeft => m_Directions.Length - m_CurrentDirectionIndex;
+        public int DirectionUsed => m_CurrentDirectionIndex;
+        public int Size => m_Directions.Length;
         public bool HasDirectionLeft => m_CurrentDirectionIndex < m_Directions.Length;
 
 
@@ -20,8 +21,8 @@ namespace EmreBeratKR.GeneticAlgorithm
         {
             get
             {
-                var randomFloat = Random.Range(0f, 100f);
-                return randomFloat > MutationPercent;
+                var randomFloat = Random.Range(0f, 1f);
+                return randomFloat <= MutationRate && MutationRate > 0f;
             }
         }
         

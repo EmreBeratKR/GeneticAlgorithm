@@ -134,7 +134,7 @@ MonoBehaviour:
   killedColor: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 1}
   succeedColor: {r: 0.31866848, g: 0.990566, b: 0.22895159, a: 1}
   baseAcceleration: 3
-  baseSpeed: 5
+  baseSpeed: 10
   maxSpeed: 15
 --- !u!65 &7786728528324094112
 BoxCollider:

@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utils;
 
 namespace EmreBeratKR.GeneticAlgorithm
 {
@@ -20,15 +21,18 @@ namespace EmreBeratKR.GeneticAlgorithm
         {
             get
             {
-                var sqrDistanceToTarget = CubeEntitySimulator.GetSqrDistanceToTarget(transform.position);
-                var tickLeft = m_Brain.DirectionLeft;
-                var rawFitness = sqrDistanceToTarget + tickLeft;
+                var distanceToTarget = CubeEntitySimulator.GetDistanceToTarget(transform.position);
+                var tickUsed = m_Brain.DirectionUsed;
+                var rawFitness = IsSucceed 
+                    ? 1f / (tickUsed * tickUsed) 
+                    : 1f / (distanceToTarget * distanceToTarget);
                 return MathfExtra.Sigmoid(rawFitness);
             }
         }
 
         public override bool IsAlive { get; protected set; }
         public override bool IsSucceed { get; protected set; }
+        public override bool IsInitialized { get; protected set; }
 
 
         private Color Color
@@ -41,17 +45,21 @@ namespace EmreBeratKR.GeneticAlgorithm
         private Vector3 m_Velocity;
 
 
-        public override void Initialize(Vector3 position)
+        public override void Initialize()
         {
-            Color = aliveColor;
-            m_Brain = CubeEntityBrain.Default;
+            base.Initialize();
             IsAlive = true;
             IsSucceed = false;
-            transform.position = position;
+            Color = aliveColor;
+            m_Brain ??= CubeEntityBrain.Default;
+            m_Velocity = Vector3.zero;
+            transform.position = CubeEntitySimulator.SpawnPosition;
         }
 
         public override void Tick(float deltaTime)
         {
+            if (!IsInitialized) return;
+            
             if (IsSucceed) return;
             
             if (!IsAlive) return;

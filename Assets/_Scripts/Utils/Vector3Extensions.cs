@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace EmreBeratKR.GeneticAlgorithm
+namespace Utils
 {
     public static class Vector3Extensions
     {

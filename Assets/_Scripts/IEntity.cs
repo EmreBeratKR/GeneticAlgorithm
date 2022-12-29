@@ -6,5 +6,6 @@ namespace EmreBeratKR.GeneticAlgorithm
         bool IsAlive { get; }
         bool IsSucceed { get; }
         void Succeed();
+        void Destroy();
     }
 }

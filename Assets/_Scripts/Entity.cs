@@ -7,16 +7,20 @@ namespace EmreBeratKR.GeneticAlgorithm
         public abstract float Fitness { get; }
         public abstract bool IsAlive { get; protected set; }
         public abstract bool IsSucceed { get; protected set; }
+        public abstract bool IsInitialized { get; protected set; }
 
 
-        public virtual void Initialize(Vector3 position)
+        public virtual void Initialize()
         {
-            
+            IsInitialized = true;
         }
         
         public virtual object Clone()
         {
-            return Instantiate(this);
+            var clone = Instantiate(this);
+            clone.name = name;
+            clone.IsInitialized = false;
+            return clone;
         }
 
         public virtual void Mutate()
@@ -37,6 +41,11 @@ namespace EmreBeratKR.GeneticAlgorithm
         public virtual void Kill()
         {
             IsAlive = false;
+        }
+
+        public virtual void Destroy()
+        {
+            Destroy(gameObject);
         }
 
         public virtual void Succeed()
